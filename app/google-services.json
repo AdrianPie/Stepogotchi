@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "883446444541",
+    "project_id": "stepogotchi-main",
+    "storage_bucket": "stepogotchi-main.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883446444541:android:e0a8cc16c10ea0efbae994",
+        "android_client_info": {
+          "package_name": "com.example.stepogotchi_main"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883446444541-nld7m4sfa136tvv7kjakb9n1f0odhn13.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stepogotchi_main",
+            "certificate_hash": "9c900119d14eb70c89a9510d4722e6460b33c28a"
+          }
+        },
+        {
+          "client_id": "883446444541-186hub9lp593q8aebt9s48o2i6k09v5s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRqmLH6q_26EZMXR-1ueW5XCIq7AA1mPU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883446444541-186hub9lp593q8aebt9s48o2i6k09v5s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
