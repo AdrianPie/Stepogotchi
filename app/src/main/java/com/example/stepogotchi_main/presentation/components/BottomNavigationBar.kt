@@ -12,11 +12,17 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -34,6 +40,7 @@ import com.example.stepogotchi_main.presentation.registerScreen.RegisterScreen
 import com.example.stepogotchi_main.presentation.shopScreen.ShopScreen
 import com.example.stepogotchi_main.presentation.stepperScreen.StepperScreen
 import com.example.stepogotchi_main.data.util.Screen
+import com.example.stepogotchi_main.data.util.SnackBarController
 import com.example.stepogotchi_main.ui.theme.PurpleGrey40
 import com.example.stepogotchi_main.ui.theme.gray
 import com.example.stepogotchi_main.ui.theme.lightGray
@@ -44,6 +51,7 @@ import com.exyte.animatednavbar.animation.balltrajectory.Parabolic
 import com.exyte.animatednavbar.animation.indendshape.Height
 import com.exyte.animatednavbar.animation.indendshape.shapeCornerRadius
 import com.exyte.animatednavbar.utils.noRippleClickable
+import kotlinx.coroutines.launch
 
 @Composable
 fun BottomNavigationBar(
@@ -58,8 +66,32 @@ fun BottomNavigationBar(
     var selectedItemIndex by rememberSaveable {
         mutableStateOf(0)
     }
+    val snackbarHostState = remember {
+        SnackbarHostState()
+    }
+    val scope = rememberCoroutineScope()
+    ObserveAsEvents(
+        flow = SnackBarController.events,
+        snackbarHostState
+    ) { event ->
+        scope.launch {
+            snackbarHostState.currentSnackbarData?.dismiss()
+
+            val result = snackbarHostState.showSnackbar(
+                message = event.message,
+                actionLabel = event.action?.name,
+                duration = SnackbarDuration.Long,
+            )
+            if (result == SnackbarResult.ActionPerformed){
+                event.action?.action?.invoke()
+            }
+        }
+    }
     Scaffold(
         modifier = Modifier.padding(all = 12.dp),
+        snackbarHost = {SnackbarHost(
+            hostState = snackbarHostState
+        )},
         bottomBar = {
             if (showBottomNavBar) {
                 AnimatedNavigationBar(
@@ -79,7 +111,7 @@ fun BottomNavigationBar(
                                 .noRippleClickable {
                                     selectedItemIndex = index
                                     navController.navigate(item.title)
-                                                   },
+                                },
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(

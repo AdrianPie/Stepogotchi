@@ -75,6 +75,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     //My
+    implementation(libs.androidx.lifecycle.runtime.compose)
 
 
     implementation (libs.play.services.auth)
@@ -104,7 +105,8 @@ dependencies {
     implementation (libs.androidx.hilt.navigation.compose)
     //AnimatedBottomBar
     implementation(libs.animated.navigation.bar)
-    //
+    //Serialization
+    implementation(libs.kotlinx.serialization.json)
 
 
 

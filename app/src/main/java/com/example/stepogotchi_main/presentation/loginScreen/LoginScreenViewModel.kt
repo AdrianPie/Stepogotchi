@@ -12,6 +12,8 @@ import com.example.stepogotchi_main.domain.model.LoginInputValidationType
 import com.example.stepogotchi_main.domain.use_case.ValidateLoginInputUseCase
 import com.example.stepogotchi_main.presentation.state.LoginState
 import com.example.stepogotchi_main.data.util.GlobalLogIn
+import com.example.stepogotchi_main.data.util.SnackBarController
+import com.example.stepogotchi_main.data.util.SnackBarEvent
 import com.example.stepogotchi_main.domain.repository.AuthRepository
 import com.example.stepogotchi_main.domain.repository.MonsterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,24 +52,42 @@ class LoginScreenViewModel @Inject constructor(
     }
 
     fun onLoginClick(){
-
         loginState = loginState.copy(isLoading = true)
         viewModelScope.launch {
             val loginResult = authRepository.login(
                 email = loginState.emailInput,
                 password = loginState.passwordInput
             )
-            loginState = loginState.copy(isSuccessfullyLoggedIn = loginResult.success!!)
+            loginState = loginState.copy(
+                isSuccessfullyLoggedIn = loginResult.success!!,
+                errorMessageLoginProcess =  loginResult.message,
+                isLoading = false
+            )
 
-            if (loginState.isSuccessfullyLoggedIn){
-                changeLoginStatus()
-            }
-            loginState = loginState.copy(errorMessageLoginProcess = loginResult.message)
+            if (loginState.isSuccessfullyLoggedIn){ changeLoginStatus() }
 
-            loginState = loginState.copy(isLoading = false)
-
+            showSnackBar(loginState.errorMessageLoginProcess)
 
         }
+    }
+    private fun showSnackBar(inputMessage: String?){
+        viewModelScope.launch {
+
+            var snackbarMessage = ""
+
+            if (inputMessage == null){
+                snackbarMessage = "Sign in successful"
+            } else {
+                snackbarMessage = inputMessage
+            }
+
+            SnackBarController.sendEvent(
+                event = SnackBarEvent(
+                    message = snackbarMessage
+                )
+            )
+        }
+
     }
 
     private fun checkInputValidation(){
