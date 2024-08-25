@@ -21,7 +21,7 @@ class Monster: RealmObject {
     }
     var hungryLevel: Int = 0
     var sleepLevel: Int = 0
-    var items: RealmList<Item> = realmListOf()
+    var exercises: RealmList<Exercise> = realmListOf()
     @Ignore
     @DrawableRes
     val monsterPicture: Int = when(level){
@@ -31,10 +31,7 @@ class Monster: RealmObject {
         else -> R.drawable.monster_level_three
     }
 }
-class Item: RealmObject {
-    var name: String = ""
-    var hungryLevel: Int? = null
-    var sleepLevel: Int? = null
-    @DrawableRes
-    var itemImage: Int = 0
+class Exercise: RealmObject {
+    var date: String = ""
+    var steps: Int = 0
 }

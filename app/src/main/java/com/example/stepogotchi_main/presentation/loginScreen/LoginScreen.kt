@@ -166,8 +166,8 @@ fun LoginContainer(
         TextEntryModule(
             modifier = Modifier
                 .fillMaxWidth(),
-            description = "Email address",
-            hint = "email",
+            description = "email",
+            hint = "Enter email",
             textValue = emailValue(),
             textColor = gray,
             cursorColor = orange,

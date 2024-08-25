@@ -21,9 +21,7 @@ class MainViewModel @Inject constructor(
 
     val visiblePermissionDialogQueue = mutableListOf<String>()
 
-    fun dismissDialog(){
-        visiblePermissionDialogQueue.removeLast()
-    }
+
     fun onPermissionResult(
         permission: String,
         isGranted: Boolean
@@ -39,9 +37,6 @@ class MainViewModel @Inject constructor(
     private val _ready = MutableStateFlow(false)
     val ready = _ready.asStateFlow()
 
-    private val _loggedIn = MutableStateFlow(false)
-    val loggedIn = _loggedIn.asStateFlow()
-
     private val _startDest = MutableStateFlow(Screen.Login.name)
     val startDest = _startDest.asStateFlow()
 
@@ -52,7 +47,6 @@ class MainViewModel @Inject constructor(
         }
         if (currentUser != null) {
             globalLogInCheck.changeLoggedState(true)
-            _loggedIn.value = true
             _startDest.value = Screen.Home.name
         }
     }

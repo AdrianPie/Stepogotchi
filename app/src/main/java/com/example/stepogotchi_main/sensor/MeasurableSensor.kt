@@ -1,5 +1,7 @@
 package com.example.stepogotchi_main.sensor
 
+import android.util.Log
+
 abstract class MeasurableSensor(
     protected val sensorType: Int
 ) {
@@ -11,6 +13,7 @@ abstract class MeasurableSensor(
     abstract fun stopListening()
 
     fun setOnSensorValueChangedListener(listener: (List<Float>) -> Unit) {
+        Log.d("dupsko", ":3 ")
         onSensorValueChanged = listener
     }
 }

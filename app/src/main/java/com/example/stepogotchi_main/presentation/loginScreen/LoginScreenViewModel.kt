@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginScreenViewModel @Inject constructor(
-    private val globalLogInRepo: GlobalLogIn,
+    private val globalLogIn: GlobalLogIn,
     private val validateLoginInputUseCase: ValidateLoginInputUseCase,
     private val authRepository: AuthRepository,
     private val monsterRepository: MonsterRepository
@@ -31,7 +31,7 @@ class LoginScreenViewModel @Inject constructor(
 
 
     private fun changeLoginStatus(){
-        globalLogInRepo.changeLoggedState(true)
+        globalLogIn.changeLoggedState(true)
     }
     var loginState by mutableStateOf(LoginState())
         private set

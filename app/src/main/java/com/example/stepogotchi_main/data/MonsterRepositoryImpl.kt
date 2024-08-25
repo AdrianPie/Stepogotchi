@@ -1,5 +1,6 @@
 package com.example.stepogotchi_main.data
 
+import com.example.stepogotchi_main.data.model.Exercise
 import com.example.stepogotchi_main.data.model.Monster
 import com.example.stepogotchi_main.domain.repository.MonsterRepository
 import io.realm.kotlin.Realm
@@ -26,9 +27,11 @@ class MonsterRepositoryImpl @Inject constructor(
                 exp = monster.exp
                 hungryLevel = monster.hungryLevel
                 sleepLevel = monster.sleepLevel
-                items = monster.items
+                exercises = monster.exercises
 
             }
         }
     }
+
+
 }
