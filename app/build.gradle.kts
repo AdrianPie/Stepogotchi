@@ -106,7 +106,7 @@ dependencies {
     //AnimatedBottomBar
     implementation(libs.animated.navigation.bar)
     //Serialization
-    implementation(libs.kotlinx.serialization.json)
+
 
 
 

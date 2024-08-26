@@ -30,8 +30,10 @@ fun StepperScreen(
         modifier = Modifier.fillMaxSize()
     ) {
 
-        val steps = viewModel.steps.collectAsState()
+
         val percentDone by viewModel.percent.collectAsState()
+
+
 
         Column(
             modifier = Modifier
@@ -47,21 +49,27 @@ fun StepperScreen(
                 onValueChange = viewModel::setStepsInputChange
             )
 
-            Text(text = steps.value.toString())
+            Text(text = "Steps left : ${viewModel.stepsState.stepsLeft.toString()}")
 
             Spacer(modifier = Modifier.height(60.dp))
 
             Text(text = "GOAL: ${viewModel.stepsState.stepsGoal} STEPS")
             
-            Button(onClick = { viewModel.addStep() }) {
-                Text(text = "test")
-            }
+
             Button(onClick =   viewModel::createStepsGoal) {
                 Text(text = "create Goal")
             }
+            Button(onClick =   viewModel::addTestStep) {
+                Text(text = "test step")
+            }
+            if(viewModel.stepsState.stepsLeft <= 0 && viewModel.stepsState.stepsGoalCreated){
+                Button(onClick = viewModel::finishStepGoal) {
+                    Text(text = "Claim reward")
+                }
+            }
 
             CustomCircularProgressIndicator(
-                initialValue = percentDone,
+                progressValue = percentDone,
                 primaryColor = orange,
                 secondaryColor = lightGray,
                 circleRadius = 300f

@@ -26,7 +26,7 @@ import kotlin.math.sin
 @Composable
 fun CustomCircularProgressIndicator(
     modifier: Modifier = Modifier,
-    initialValue:Int,
+    progressValue:Int,
     primaryColor: Color,
     secondaryColor:Color,
     minValue:Int = 0,
@@ -37,11 +37,6 @@ fun CustomCircularProgressIndicator(
     var circleCenter by remember {
         mutableStateOf(Offset.Zero)
     }
-
-    var positionValue by remember {
-        mutableStateOf(initialValue)
-    }
-
 
 
     Box(
@@ -81,7 +76,7 @@ fun CustomCircularProgressIndicator(
             drawArc(
                 color = primaryColor,
                 startAngle = 90f,
-                sweepAngle = (360f/maxValue) * initialValue.toFloat(),
+                sweepAngle = (360f/maxValue) * progressValue.toFloat(),
                 style = Stroke(
                     width = circleThickness,
                     cap = StrokeCap.Round
@@ -101,7 +96,7 @@ fun CustomCircularProgressIndicator(
             val outerRadius = circleRadius + circleThickness/2f
             val gap = 15f
             for (i in 0 .. (maxValue-minValue)){
-                val color = if(i < initialValue-minValue) primaryColor else primaryColor.copy(alpha = 0.3f)
+                val color = if(i < progressValue-minValue) primaryColor else primaryColor.copy(alpha = 0.3f)
                 val angleInDegrees = i*360f/(maxValue-minValue).toFloat()
                 val angleInRad = angleInDegrees * PI / 180f + PI/2f
 
@@ -135,7 +130,7 @@ fun CustomCircularProgressIndicator(
             drawContext.canvas.nativeCanvas.apply {
                 drawIntoCanvas {
                     drawText(
-                        "$initialValue %",
+                        "$progressValue %",
                         circleCenter.x,
                         circleCenter.y + 45.dp.toPx()/3f,
                         Paint().apply {

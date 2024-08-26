@@ -7,8 +7,11 @@ import com.example.stepogotchi_main.data.model.Exercise
 import com.example.stepogotchi_main.data.model.Monster
 import com.example.stepogotchi_main.domain.repository.MonsterRepository
 import com.example.stepogotchi_main.domain.repository.PreferencesRepository
-import com.example.stepogotchi_main.domain.use_case.GetStepsUseCase
-import com.example.stepogotchi_main.domain.use_case.SaveStepsUseCase
+import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.GetStepsUseCase
+import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.GetSystemStepsUseCase
+import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.ResetSharedPreferencesUseCase
+import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.SaveStepsUseCase
+import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.SaveSystemStepsUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -57,4 +60,21 @@ object DataBaseModule {
     fun provideSaveStepsUseCase(preferencesHelper: PreferencesRepository): SaveStepsUseCase {
         return SaveStepsUseCase(preferencesHelper)
     }
+    @Provides
+    @Singleton
+    fun provideGetSystemStepsUseCase(preferencesHelper: PreferencesRepository): GetSystemStepsUseCase {
+        return GetSystemStepsUseCase(preferencesHelper)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveSystemStepsUseCase(preferencesHelper: PreferencesRepository): SaveSystemStepsUseCase {
+        return SaveSystemStepsUseCase(preferencesHelper)
+    }
+    @Provides
+    @Singleton
+    fun provideResetSharedPreferencesUseCase(preferencesHelper: PreferencesRepository): ResetSharedPreferencesUseCase {
+        return ResetSharedPreferencesUseCase(preferencesHelper)
+    }
+
 }
