@@ -1,5 +1,6 @@
 package com.example.stepogotchi_main.presentation.homescreen
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,10 +30,19 @@ class HomeScreenViewModel @Inject constructor(
    val monster = _monster.asStateFlow()
 
    init {
+      Log.d("dupsko", ":122 ")
        viewModelScope.launch {
-//          monsterRepository.getData().collect{
-//             _monster.value = it
-//          }
+          Log.d("dupsko", ":1 3")
+          //val dataExists = monsterRepository.getData().firstOrNull() != null
+          Log.d("dupsko", ":1 ")
+          if (false) {
+             println("Dane istnieją w bazie danych.")
+             Log.d("dupsko", ":2")
+          } else {
+             println("Brak danych w bazie danych.")
+             monsterRepository.insertMonster(Monster())
+             Log.d("dupsko", ":3xx ")
+          }
        }
    }
    fun logout(){
@@ -39,5 +50,4 @@ class HomeScreenViewModel @Inject constructor(
       globalLogIn.changeLoggedState(false)
    }
 
-   val logged = globalLogIn.isLogged
 }

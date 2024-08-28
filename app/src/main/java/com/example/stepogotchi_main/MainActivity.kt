@@ -34,35 +34,40 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
+    private val permissionsToRequest = arrayOf(
+        Manifest.permission.ACTIVITY_RECOGNITION,
+        Manifest.permission.POST_NOTIFICATIONS,
+        Manifest.permission.FOREGROUND_SERVICE_REMOTE_MESSAGING
+    )
 
     private val mainViewModel: MainViewModel by viewModels()
-    
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setupSplashScreen()
-       
 
             setContent {
                 Stepogotchi_mainTheme {
-                    val stepCounterPermissionResultLauncher = rememberLauncherForActivityResult(
-                            contract = ActivityResultContracts.RequestPermission(),
-                            onResult = { isGranted ->
-                               mainViewModel.onPermissionResult(
-                                   permission = Manifest.permission.ACTIVITY_RECOGNITION,
-                                   isGranted = isGranted
-                               )
+
+                    val multiplePermissionResultLauncher = rememberLauncherForActivityResult(
+                        contract = ActivityResultContracts.RequestMultiplePermissions(),
+                        onResult = { perms ->
+                            permissionsToRequest.forEach { permission ->
+                                mainViewModel.onPermissionResult(
+                                    permission = permission,
+                                    isGranted = perms[permission] == true
+                                )
                             }
+                        }
                     )
                     val startDest by mainViewModel.startDest.collectAsState()
 
                     BottomNavigationBar(
                         startDest = startDest,
                         permission = {
-                            stepCounterPermissionResultLauncher.launch(
-                            Manifest.permission.ACTIVITY_RECOGNITION)
+                            multiplePermissionResultLauncher.launch(permissionsToRequest)
                         }
                     )
                 }
@@ -100,9 +105,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-
-
 
 }
 

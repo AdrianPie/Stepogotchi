@@ -1,9 +1,12 @@
 package com.example.stepogotchi_main.presentation.stepperScreen
+import android.content.Intent
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.stepogotchi_main.data.local.StepSensorService
 import com.example.stepogotchi_main.data.model.Exercise
 import com.example.stepogotchi_main.data.util.getCurrentDateString
 import com.example.stepogotchi_main.domain.repository.MonsterRepository
@@ -37,24 +40,15 @@ class StepperViewModel@Inject constructor(
     private val _percent = MutableStateFlow(0)
     val percent = _percent.asStateFlow()
 
+    private val _test = MutableStateFlow("2")
+    val test = _test.asStateFlow()
+
+    private val _test2 = MutableStateFlow("x")
+    val test2 = _test2.asStateFlow()
+
 
 
     init {
-        stepCounter.startListening()
-        if (sharedPreferencesUseCase.getSteps() != 0){
-            stepsState.copy(
-                stepsGoal = sharedPreferencesUseCase.getSteps(),
-                systemStartingSteps = sharedPreferencesUseCase.getSystemSteps()
-            )
-            stepCounter.setOnSensorValueChangedListener { values ->
-                stepsState = stepsState.copy(
-                    stepsLeft = stepsState.stepsGoal - (values[0].toInt() - stepsState.systemStartingSteps)
-                )
-                _percent.value = ((stepsState.stepsLeft.toFloat() / stepsState.stepsGoal) * 100).toInt()
-            }
-
-        }
-        stepsState = stepsState.copy(stepsGoal = sharedPreferencesUseCase.getSteps())
 
     }
 
@@ -73,10 +67,10 @@ class StepperViewModel@Inject constructor(
             monsterRepository.updateMonster(monster = monster)
 
             stepsState = StepperState()
-
-            sharedPreferencesUseCase.resetSharedPreferences()
         }
-
+    }
+    fun testResetShared(){
+        sharedPreferencesUseCase.resetSharedPreferences()
     }
     fun addTestStep(){
         stepsState = stepsState.copy(
@@ -89,33 +83,20 @@ class StepperViewModel@Inject constructor(
     fun setStepsInputChange(steps: String){
         stepsState = stepsState.copy(stepsGoalInput = steps)
     }
-    fun createStepsGoal(){
-        sharedPreferencesUseCase.saveSteps(stepsState.stepsGoalInput.toInt())
 
-        stepsState = stepsState.copy(stepsGoal = stepsState.stepsGoalInput.toInt())
+    fun createStepsGoal(){
         stepsState = stepsState.copy(
-            stepsLeft = stepsState.stepsGoalInput.toInt(),
-            stepsGoalCreated = true
+            stepsGoal = stepsState.stepsGoalInput.toInt(),
+            stepsGoalCreated = true,
+            systemStartingSteps = stepsState.sensorSteps
         )
 
-        stepCounter.setOnSensorValueChangedListener { values ->
-            if (!stepsState.stepsGoalCreated){
-                stepsState = stepsState.copy(
-                    systemStartingSteps = values[0].toInt(),
-                    stepsGoalCreated = true
-                )
-                sharedPreferencesUseCase.saveSystemSteps(values[0].toInt())
-            } else {
-                stepsState = stepsState.copy(
-                    stepsLeft = stepsState.stepsGoal - (values[0].toInt() - stepsState.systemStartingSteps)
-                )
-                _percent.value = ((stepsState.stepsLeft.toFloat() / stepsState.stepsGoal) * 100).toInt()
-            }
 
+        stepsState = stepsState.copy(stepsLeft = stepsState.stepsGoal - stepsState.systemStartingSteps)
 
-
-        }
     }
+
+
 
 
 }

@@ -7,12 +7,13 @@ import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.mapNotNull
 import javax.inject.Inject
 
 class MonsterRepositoryImpl @Inject constructor(
     val realm: Realm
 ): MonsterRepository {
-    override fun getData(): Flow<Monster> {
+    override fun getData(): Flow<Monster>{
         return realm.query<Monster>().asFlow().map { it.list.first() }
     }
 

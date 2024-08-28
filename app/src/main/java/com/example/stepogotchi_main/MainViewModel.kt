@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.stepogotchi_main.data.util.GlobalLogIn
 import com.example.stepogotchi_main.data.util.Screen
 import com.example.stepogotchi_main.domain.repository.AuthRepository
+import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.ResetSharedPreferencesUseCase
 import com.example.stepogotchi_main.sensor.MeasurableSensor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val globalLogInCheck: GlobalLogIn,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val sharedPreferencesUseCase: ResetSharedPreferencesUseCase
 ): ViewModel() {
 
     val visiblePermissionDialogQueue = mutableListOf<String>()
@@ -39,6 +41,10 @@ class MainViewModel @Inject constructor(
 
     private val _startDest = MutableStateFlow(Screen.Login.name)
     val startDest = _startDest.asStateFlow()
+
+    fun resetPrefs(){
+        sharedPreferencesUseCase()
+    }
 
     init {
         viewModelScope.launch {
