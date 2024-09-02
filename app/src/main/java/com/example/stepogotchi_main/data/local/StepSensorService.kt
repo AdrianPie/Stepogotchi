@@ -6,6 +6,7 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.stepogotchi_main.R
+import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.SaveSystemStepsUseCase
 import com.example.stepogotchi_main.sensor.MeasurableSensor
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -17,6 +18,11 @@ class StepSensorService(): Service() {
 
     @Inject
     lateinit var stepCounterSensor: MeasurableSensor
+
+    @Inject
+    lateinit var saveSystemStepsUseCase: SaveSystemStepsUseCase
+
+
 
     override fun onBind(p0: Intent?): IBinder? {
         return null
@@ -49,11 +55,12 @@ class StepSensorService(): Service() {
                     startingSteps = stepsFromDevice[0].toInt()
                     startingStepsCollected = true
                 }
+                saveSystemStepsUseCase(stepsFromDevice[0].toInt())
                 test++
                 stepsLeft = stepsGoal - (stepsFromDevice[0].toInt() - startingSteps)
-                Log.d("dupsko", "startSensor: DZIALA ")
+
                 val notification = NotificationCompat.Builder(this, "stepper_channel")
-                    .setSmallIcon(R.drawable.ape_logo)
+                    .setSmallIcon(R.drawable.ic_launcher_foreground)
                     .setContentTitle("Step quest is active")
                     .setContentText("Steps left: $stepsLeft/$stepsGoal /${stepsFromDevice[0].toInt()} / t:$test")
                     .build()

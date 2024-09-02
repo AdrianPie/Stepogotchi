@@ -40,7 +40,6 @@ fun StepperScreen(
         val context = LocalContext.current
 
 
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -60,30 +59,35 @@ fun StepperScreen(
             Spacer(modifier = Modifier.height(60.dp))
 
             Text(text = "GOAL: ${viewModel.stepsState.stepsGoal} STEPS")
-            
+            Text(text = "GOAL: ${viewModel.stepsState.stepsLeft} STEPS LEFT")
+            Text(text = "GOAL: ${viewModel.stepsState.sensorSteps} Sensor STEPS")
+            Text(text = "GOAL: ${viewModel.stepsState.systemStartingSteps} Sensor Starting steps")
 
-            Button(onClick = {
-                Intent(context, StepSensorService::class.java).also {
-                    it.action = StepSensorService.Actions.START.name
-                    it.putExtra("STEPS_GOAL", viewModel.stepsState.stepsGoalInput.toInt())
-                    context.startService(it)
+
+            
+            if (!viewModel.stepsState.stepsGoalCreated){
+                Button(onClick = {
+                    viewModel.createStepsGoal()
+//                Intent(context, StepSensorService::class.java).also {
+//                    it.action = StepSensorService.Actions.START.name
+//                    it.putExtra("STEPS_GOAL", viewModel.stepsState.stepsGoalInput.toInt())
+//                    context.startService(it)
+//                }
+                }) {
+                    Text(text = "create Goal")
                 }
-            }) {
-                Text(text = "create Goal")
             }
+
+
             Button(onClick =   viewModel::testResetShared) {
-                Text(text = "clean sharedpreferences")
-            }
-            Button(onClick =   viewModel::addTestStep) {
-                Text(text = "test step")
+                Text(text = "Restart saved data")
             }
             if(viewModel.stepsState.stepsLeft <= 0 && viewModel.stepsState.stepsGoalCreated){
                 Button(onClick = viewModel::finishStepGoal) {
                     Text(text = "Claim reward")
                 }
             }
-            Text(text = "test: $test")
-            Text(text = "test2: $test2")
+
 
             CustomCircularProgressIndicator(
                 progressValue = percentDone,

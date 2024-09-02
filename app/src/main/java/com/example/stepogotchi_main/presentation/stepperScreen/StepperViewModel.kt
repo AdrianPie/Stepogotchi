@@ -43,12 +43,25 @@ class StepperViewModel@Inject constructor(
     private val _test = MutableStateFlow("2")
     val test = _test.asStateFlow()
 
-    private val _test2 = MutableStateFlow("x")
+    private val _test2 = MutableStateFlow("test 2")
     val test2 = _test2.asStateFlow()
 
 
-
     init {
+        if (sharedPreferencesUseCase.getSteps() != 0){
+            stepsState = stepsState.copy(
+                systemStartingSteps = sharedPreferencesUseCase.getSystemSteps(),
+                stepsGoal = sharedPreferencesUseCase.getSteps(),
+                sensorSteps = 0,
+                stepsGoalCreated = true
+            )
+            stepCounter.startListening()
+            stepCounter.setOnSensorValueChangedListener { steps ->
+                stepsState = stepsState.copy(
+                    sensorSteps = steps[0].toInt()
+                )
+            }
+        }
 
     }
 
@@ -71,6 +84,8 @@ class StepperViewModel@Inject constructor(
     }
     fun testResetShared(){
         sharedPreferencesUseCase.resetSharedPreferences()
+        stepsState = StepperState()
+
     }
     fun addTestStep(){
         stepsState = stepsState.copy(
@@ -85,10 +100,24 @@ class StepperViewModel@Inject constructor(
     }
 
     fun createStepsGoal(){
+        sharedPreferencesUseCase.saveSteps(stepsState.stepsGoalInput.toInt())
+        stepCounter.startListening()
+        val systemStepsCollected = false
+        stepCounter.setOnSensorValueChangedListener { steps ->
+            if (!systemStepsCollected){
+                sharedPreferencesUseCase.saveSystemSteps(steps[0].toInt())
+                stepsState = stepsState.copy(
+                    systemStartingSteps = steps[0].toInt()
+                )
+            }
+            stepsState = stepsState.copy(
+                sensorSteps = steps[0].toInt()
+            )
+        }
+
         stepsState = stepsState.copy(
             stepsGoal = stepsState.stepsGoalInput.toInt(),
             stepsGoalCreated = true,
-            systemStartingSteps = stepsState.sensorSteps
         )
 
 
@@ -96,7 +125,10 @@ class StepperViewModel@Inject constructor(
 
     }
 
-
+    override fun onCleared() {
+        super.onCleared()
+        stepCounter.stopListening()
+    }
 
 
 }
