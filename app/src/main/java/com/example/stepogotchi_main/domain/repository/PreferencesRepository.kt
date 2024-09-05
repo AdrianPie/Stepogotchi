@@ -5,5 +5,7 @@ interface PreferencesRepository {
     fun getSteps(): Int
     fun saveSystemSteps(systemSteps: Int)
     fun getSystemSteps(): Int
+    fun saveStepsLeft(systemSteps: Int)
+    fun getStepsLeft(): Int
     fun resetPreferences()
 }

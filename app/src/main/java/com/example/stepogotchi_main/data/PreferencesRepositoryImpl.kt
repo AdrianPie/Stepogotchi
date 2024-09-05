@@ -13,6 +13,7 @@ class PreferencesRepositoryImpl(context: Context) : PreferencesRepository {
         private const val PREFS_NAME = "app_prefs"
         private const val KEY_STEPS = "key_steps"
         private const val KEY_SYSTEM_STEPS = "key_system_steps"
+        private const val KEY_LEFT_STEPS = "key_left_steps"
     }
 
     override fun saveSteps(steps: Int) {
@@ -29,6 +30,15 @@ class PreferencesRepositoryImpl(context: Context) : PreferencesRepository {
     override fun getSystemSteps(): Int {
         return sharedPreferences.getInt(KEY_SYSTEM_STEPS, 0)
     }
+
+    override fun saveStepsLeft(systemSteps: Int) {
+        sharedPreferences.edit().putInt(KEY_LEFT_STEPS, systemSteps).apply()
+    }
+
+    override fun getStepsLeft(): Int {
+        return sharedPreferences.getInt(KEY_LEFT_STEPS, 0)
+    }
+
     override fun resetPreferences() {
         sharedPreferences.edit().clear().apply()
     }

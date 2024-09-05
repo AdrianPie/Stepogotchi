@@ -7,5 +7,7 @@ data class GetSharedPreferencesUseCase @Inject constructor(
     val getSystemSteps: GetSystemStepsUseCase,
     val saveSteps: SaveStepsUseCase,
     val saveSystemSteps: SaveSystemStepsUseCase,
-    val resetSharedPreferences: ResetSharedPreferencesUseCase
+    val resetSharedPreferences: ResetSharedPreferencesUseCase,
+    val saveLeftStepsUseCase: SaveLeftStepsUseCase,
+    val getLeftStepsUseCase: GetLeftStepsUseCase
 )

@@ -7,5 +7,6 @@ data class StepperState(
     val systemStartingSteps: Int = 0,
     val stepsGoalCreated: Boolean = false,
     val stepsLeft: Int = 0,
+    val percentDone: Int = 0,
     val goalReached: Boolean = false
 )

@@ -11,9 +11,11 @@ import com.example.stepogotchi_main.domain.use_case.databaseUseCase.AddExerciseU
 import com.example.stepogotchi_main.domain.use_case.databaseUseCase.GetDataUseCase
 import com.example.stepogotchi_main.domain.use_case.databaseUseCase.InsertDataUseCase
 import com.example.stepogotchi_main.domain.use_case.databaseUseCase.UpdateDataUseCase
+import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.GetLeftStepsUseCase
 import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.GetStepsUseCase
 import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.GetSystemStepsUseCase
 import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.ResetSharedPreferencesUseCase
+import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.SaveLeftStepsUseCase
 import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.SaveStepsUseCase
 import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.SaveSystemStepsUseCase
 import dagger.Module
@@ -68,6 +70,16 @@ object DataBaseModule {
     @Singleton
     fun provideGetSystemStepsUseCase(preferencesHelper: PreferencesRepository): GetSystemStepsUseCase {
         return GetSystemStepsUseCase(preferencesHelper)
+    }
+    @Provides
+    @Singleton
+    fun provideGetStepsLeftUseCase(preferencesHelper: PreferencesRepository): GetLeftStepsUseCase {
+        return GetLeftStepsUseCase(preferencesHelper)
+    }
+    @Provides
+    @Singleton
+    fun provideSaveLeftStepsUseCase(preferencesHelper: PreferencesRepository): SaveLeftStepsUseCase {
+        return SaveLeftStepsUseCase(preferencesHelper)
     }
 
     @Provides

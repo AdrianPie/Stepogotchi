@@ -46,7 +46,7 @@ fun StepperScreen(
         modifier = Modifier.fillMaxSize()
     ) {
 
-        val percentDone by viewModel.percent.collectAsState()
+
 
 
 
@@ -60,7 +60,7 @@ fun StepperScreen(
             Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = "Goal : ${viewModel.stepsState.stepsGoal}",
+                text = "Goal : ${viewModel.stepsState .stepsGoal}",
                 fontSize = 35.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -121,7 +121,7 @@ fun StepperScreen(
             }
 
             CustomCircularProgressIndicator(
-                progressValue = percentDone,
+                progressValue = viewModel.stepsState.percentDone,
                 primaryColor = orange,
                 secondaryColor = lightGray,
                 circleRadius = 300f
@@ -129,8 +129,6 @@ fun StepperScreen(
 
             }
         }
-
     }
-
-    }
+}
 
