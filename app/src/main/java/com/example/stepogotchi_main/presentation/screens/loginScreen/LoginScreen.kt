@@ -1,4 +1,4 @@
-package com.example.stepogotchi_main.presentation.loginScreen
+package com.example.stepogotchi_main.presentation.screens.loginScreen
 
 import android.util.Log
 import androidx.compose.foundation.background

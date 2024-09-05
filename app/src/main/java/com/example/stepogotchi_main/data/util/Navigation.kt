@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.stepogotchi_main.presentation.homescreen.HomeScreen
-import com.example.stepogotchi_main.presentation.loginScreen.LoginScreen
-import com.example.stepogotchi_main.presentation.registerScreen.RegisterScreen
+import com.example.stepogotchi_main.presentation.screens.homescreen.HomeScreen
+import com.example.stepogotchi_main.presentation.screens.loginScreen.LoginScreen
+import com.example.stepogotchi_main.presentation.screens.registerScreen.RegisterScreen
 
 @Composable
 fun Navigation() {

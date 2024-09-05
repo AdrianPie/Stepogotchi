@@ -2,8 +2,8 @@ package com.example.stepogotchi_main.di
 
 import com.example.stepogotchi_main.data.AuthRepositoryImpl
 import com.example.stepogotchi_main.domain.repository.AuthRepository
-import com.example.stepogotchi_main.domain.use_case.ValidateLoginInputUseCase
-import com.example.stepogotchi_main.domain.use_case.ValidateRegisterInputUseCase
+import com.example.stepogotchi_main.domain.use_case.validateUseCase.ValidateLoginInputUseCase
+import com.example.stepogotchi_main.domain.use_case.validateUseCase.ValidateRegisterInputUseCase
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides

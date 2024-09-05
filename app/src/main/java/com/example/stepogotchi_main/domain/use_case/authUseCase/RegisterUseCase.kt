@@ -1,4 +1,4 @@
-package com.example.stepogotchi_main.domain.use_case
+package com.example.stepogotchi_main.domain.use_case.authUseCase
 
 import com.example.stepogotchi_main.data.Resource
 import com.example.stepogotchi_main.domain.repository.AuthRepository

@@ -1,4 +1,4 @@
-package com.example.stepogotchi_main.presentation.registerScreen
+package com.example.stepogotchi_main.presentation.screens.registerScreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

@@ -1,21 +1,18 @@
-package com.example.stepogotchi_main.presentation.loginScreen
+package com.example.stepogotchi_main.presentation.screens.loginScreen
 
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.stepogotchi_main.data.model.Monster
 import com.example.stepogotchi_main.domain.model.LoginInputValidationType
-import com.example.stepogotchi_main.domain.use_case.ValidateLoginInputUseCase
+import com.example.stepogotchi_main.domain.use_case.validateUseCase.ValidateLoginInputUseCase
 import com.example.stepogotchi_main.presentation.state.LoginState
 import com.example.stepogotchi_main.data.util.GlobalLogIn
 import com.example.stepogotchi_main.data.util.SnackBarController
 import com.example.stepogotchi_main.data.util.SnackBarEvent
 import com.example.stepogotchi_main.domain.repository.AuthRepository
-import com.example.stepogotchi_main.domain.repository.MonsterRepository
+import com.example.stepogotchi_main.domain.repository.DatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,7 +22,7 @@ class LoginScreenViewModel @Inject constructor(
     private val globalLogIn: GlobalLogIn,
     private val validateLoginInputUseCase: ValidateLoginInputUseCase,
     private val authRepository: AuthRepository,
-    private val monsterRepository: MonsterRepository
+    private val databaseRepository: DatabaseRepository
 ) : ViewModel() {
 
 

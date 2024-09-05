@@ -1,8 +1,8 @@
 package com.example.stepogotchi_main.domain.use_case
 
 import com.example.stepogotchi_main.domain.model.LoginInputValidationType
+import com.example.stepogotchi_main.domain.use_case.validateUseCase.ValidateLoginInputUseCase
 import com.google.common.truth.Truth.assertThat
-import okhttp3.internal.http.hasBody
 
 import org.junit.Test
 

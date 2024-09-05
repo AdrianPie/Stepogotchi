@@ -42,9 +42,6 @@ class MainViewModel @Inject constructor(
     private val _startDest = MutableStateFlow(Screen.Login.name)
     val startDest = _startDest.asStateFlow()
 
-    fun resetPrefs(){
-        sharedPreferencesUseCase()
-    }
 
     init {
         viewModelScope.launch {

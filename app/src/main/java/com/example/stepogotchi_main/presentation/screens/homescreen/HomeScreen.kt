@@ -1,4 +1,4 @@
-package com.example.stepogotchi_main.presentation.homescreen
+package com.example.stepogotchi_main.presentation.screens.homescreen
 
 import android.util.Log
 import android.widget.ProgressBar
@@ -72,8 +72,8 @@ import com.google.firebase.auth.FirebaseUser
 
 @Composable
 fun HomeScreen(
- viewModel: HomeScreenViewModel = hiltViewModel(),
- onLogoutClick:()-> Unit
+    viewModel: HomeScreenViewModel = hiltViewModel(),
+    onLogoutClick:()-> Unit
 ) {
 
     val monster by viewModel.monster.collectAsState()

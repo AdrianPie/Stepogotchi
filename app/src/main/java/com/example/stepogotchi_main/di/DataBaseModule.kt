@@ -1,12 +1,16 @@
 package com.example.stepogotchi_main.di
 
 import android.content.Context
-import com.example.stepogotchi_main.data.MonsterRepositoryImpl
+import com.example.stepogotchi_main.data.DatabaseRepositoryImpl
 import com.example.stepogotchi_main.data.PreferencesRepositoryImpl
 import com.example.stepogotchi_main.data.model.Exercise
 import com.example.stepogotchi_main.data.model.Monster
-import com.example.stepogotchi_main.domain.repository.MonsterRepository
+import com.example.stepogotchi_main.domain.repository.DatabaseRepository
 import com.example.stepogotchi_main.domain.repository.PreferencesRepository
+import com.example.stepogotchi_main.domain.use_case.databaseUseCase.AddExerciseUseCase
+import com.example.stepogotchi_main.domain.use_case.databaseUseCase.GetDataUseCase
+import com.example.stepogotchi_main.domain.use_case.databaseUseCase.InsertDataUseCase
+import com.example.stepogotchi_main.domain.use_case.databaseUseCase.UpdateDataUseCase
 import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.GetStepsUseCase
 import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.GetSystemStepsUseCase
 import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.ResetSharedPreferencesUseCase
@@ -40,8 +44,8 @@ object DataBaseModule {
     }
     @Singleton
     @Provides
-    fun provideMonsterRepository(realm: Realm): MonsterRepository{
-        return MonsterRepositoryImpl(realm = realm)
+    fun provideMonsterRepository(realm: Realm): DatabaseRepository{
+        return DatabaseRepositoryImpl(realm = realm)
     }
     @Provides
     @Singleton
@@ -75,6 +79,24 @@ object DataBaseModule {
     @Singleton
     fun provideResetSharedPreferencesUseCase(preferencesHelper: PreferencesRepository): ResetSharedPreferencesUseCase {
         return ResetSharedPreferencesUseCase(preferencesHelper)
+    }
+    @Provides
+    fun provideGetDataUseCase(repository: DatabaseRepository): GetDataUseCase {
+        return GetDataUseCase(repository)
+    }
+
+    @Provides
+    fun provideInsertDataUseCase(repository: DatabaseRepository): InsertDataUseCase {
+        return InsertDataUseCase(repository)
+    }
+
+    @Provides
+    fun provideUpdateDataUseCase(repository: DatabaseRepository): UpdateDataUseCase {
+        return UpdateDataUseCase(repository)
+    }
+    @Provides
+    fun provideAddExerciseUseCase(repository: DatabaseRepository): AddExerciseUseCase {
+        return AddExerciseUseCase(repository)
     }
 
 }

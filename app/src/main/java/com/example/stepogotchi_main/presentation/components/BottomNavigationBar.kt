@@ -34,11 +34,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.stepogotchi_main.MainViewModel
-import com.example.stepogotchi_main.presentation.homescreen.HomeScreen
-import com.example.stepogotchi_main.presentation.loginScreen.LoginScreen
-import com.example.stepogotchi_main.presentation.registerScreen.RegisterScreen
-import com.example.stepogotchi_main.presentation.shopScreen.ShopScreen
-import com.example.stepogotchi_main.presentation.stepperScreen.StepperScreen
+import com.example.stepogotchi_main.presentation.screens.homescreen.HomeScreen
+import com.example.stepogotchi_main.presentation.screens.loginScreen.LoginScreen
+import com.example.stepogotchi_main.presentation.screens.registerScreen.RegisterScreen
+import com.example.stepogotchi_main.presentation.screens.shopScreen.ShopScreen
+import com.example.stepogotchi_main.presentation.screens.stepperScreen.StepperScreen
 import com.example.stepogotchi_main.data.util.Screen
 import com.example.stepogotchi_main.data.util.SnackBarController
 import com.example.stepogotchi_main.ui.theme.PurpleGrey40
