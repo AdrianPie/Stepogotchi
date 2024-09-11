@@ -1,22 +1,15 @@
 package com.example.stepogotchi_main.presentation.components
 
-import android.hardware.SensorEventListener
-import android.util.Log
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -31,18 +24,15 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.stepogotchi_main.MainViewModel
 import com.example.stepogotchi_main.presentation.screens.homescreen.HomeScreen
 import com.example.stepogotchi_main.presentation.screens.loginScreen.LoginScreen
 import com.example.stepogotchi_main.presentation.screens.registerScreen.RegisterScreen
-import com.example.stepogotchi_main.presentation.screens.shopScreen.ShopScreen
+import com.example.stepogotchi_main.presentation.screens.exerciseListScreen.ExerciseListScreen
 import com.example.stepogotchi_main.presentation.screens.stepperScreen.StepperScreen
 import com.example.stepogotchi_main.data.util.Screen
 import com.example.stepogotchi_main.data.util.SnackBarController
-import com.example.stepogotchi_main.ui.theme.PurpleGrey40
-import com.example.stepogotchi_main.ui.theme.gray
 import com.example.stepogotchi_main.ui.theme.lightGray
 import com.example.stepogotchi_main.ui.theme.orange
 import com.example.stepogotchi_main.ui.theme.white
@@ -88,13 +78,14 @@ fun BottomNavigationBar(
         }
     }
     Scaffold(
-        modifier = Modifier.padding(all = 12.dp),
+        modifier = Modifier,
         snackbarHost = {SnackbarHost(
             hostState = snackbarHostState
         )},
         bottomBar = {
             if (showBottomNavBar) {
                 AnimatedNavigationBar(
+                    modifier = Modifier.padding(6.dp),
                     selectedIndex = selectedItemIndex,
                     cornerRadius = shapeCornerRadius(cornerRadius = 34.dp),
                     ballAnimation = Parabolic(tween(300)),
@@ -121,9 +112,7 @@ fun BottomNavigationBar(
                                 tint = if (selectedItemIndex == index) lightGray
                                 else white
                             )
-
                         }
-
                     }
                 }
             }
@@ -175,8 +164,8 @@ fun BottomNavigationBar(
                     }
                 )
             }
-            composable(Screen.Shop.name) {
-                ShopScreen(
+            composable(Screen.Archive.name) {
+                ExerciseListScreen(
                 )
             }
             composable(Screen.Stepper.name) {

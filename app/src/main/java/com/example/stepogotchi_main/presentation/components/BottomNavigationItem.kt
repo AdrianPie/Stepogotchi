@@ -3,12 +3,12 @@ package com.example.stepogotchi_main.presentation.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Explore
+import androidx.compose.material.icons.filled.FormatListNumbered
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.ShoppingBasket
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Explore
+import androidx.compose.material.icons.outlined.FormatListNumbered
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.ShoppingBasket
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.stepogotchi_main.data.util.Screen
 
@@ -30,9 +30,9 @@ data class BottomNavigationItem(
                 unselectedItem = Icons.Outlined.Explore
             ),
             BottomNavigationItem(
-                title = Screen.Shop.name,
-                selectedItem = Icons.Filled.ShoppingBasket,
-                unselectedItem = Icons.Outlined.ShoppingBasket
+                title = Screen.Archive.name,
+                selectedItem = Icons.Filled.FormatListNumbered,
+                unselectedItem = Icons.Outlined.FormatListNumbered
             )
         )
     }

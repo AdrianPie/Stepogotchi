@@ -33,6 +33,7 @@ import com.example.stepogotchi_main.ui.theme.white
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextEntryModule(
+    modifier: Modifier = Modifier,
     description:String,
     hint:String,
     leadingIcon: ImageVector,
@@ -44,7 +45,6 @@ fun TextEntryModule(
     onValueChanged:(String) -> Unit,
     trailingIcon: ImageVector? = null,
     onTrailingIconClick:(()->Unit)?,
-    modifier: Modifier = Modifier
 ) {
 
     Column(
@@ -113,7 +113,7 @@ fun TextEntryModulePreview(){
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp,0.dp,10.dp,5.dp),
-        hint = "KApps@gmail.com",
+        hint = "Ape@gmail.com",
         leadingIcon = Icons.Default.Email,
         textValue = "TextInput",
         textColor = Color.Black,
@@ -121,6 +121,6 @@ fun TextEntryModulePreview(){
         onValueChanged = {},
         trailingIcon = Icons.Filled.RemoveRedEye,
         onTrailingIconClick = {},
-        visualTransformation = PasswordVisualTransformation()
+        visualTransformation = PasswordVisualTransformation(),
     )
 }

@@ -174,7 +174,7 @@ fun LoginContainer(
             onValueChanged = onEmailChanged,
             trailingIcon = null,
             onTrailingIconClick = null,
-            leadingIcon = Icons.Default.Email
+            leadingIcon = Icons.Default.Email,
         )
         TextEntryModule(
             modifier = Modifier

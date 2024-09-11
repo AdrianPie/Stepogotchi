@@ -26,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -45,10 +46,6 @@ fun StepperScreen(
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
-
-
-
-
 
         Column(
             modifier = Modifier
@@ -70,7 +67,19 @@ fun StepperScreen(
                 fontSize = 15.sp,
                 fontWeight = FontWeight.ExtraLight
             )
+
+            CustomCircularProgressIndicator(
+                progressValue = viewModel.stepsState.percentDone,
+                primaryColor = orange,
+                secondaryColor = lightGray,
+                circleRadius = 360f
+            ) {
+
+            }
+
             TextEntryModule(
+                modifier = Modifier.fillMaxWidth(0.5f),
+                keyboardType = KeyboardType.Number,
                 description = "",
                 hint = "Enter steps goal",
                 leadingIcon = Icons.Default.SportsTennis,
@@ -118,15 +127,6 @@ fun StepperScreen(
                     onClick = viewModel::finishStepGoal) {
                     Text(text = "Claim reward")
                 }
-            }
-
-            CustomCircularProgressIndicator(
-                progressValue = viewModel.stepsState.percentDone,
-                primaryColor = orange,
-                secondaryColor = lightGray,
-                circleRadius = 300f
-            ) {
-
             }
         }
     }

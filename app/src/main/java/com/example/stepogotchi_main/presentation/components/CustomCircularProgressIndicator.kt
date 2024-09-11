@@ -5,6 +5,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -17,6 +18,8 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.stepogotchi_main.ui.theme.orange
+import com.example.stepogotchi_main.ui.theme.redOrange
 import com.example.stepogotchi_main.ui.theme.white
 
 import kotlin.math.PI
@@ -40,11 +43,10 @@ fun CustomCircularProgressIndicator(
 
 
     Box(
-        modifier = modifier
+        modifier = modifier.height(400.dp)
     ){
         Canvas(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ){
             val width = size.width
             val height = size.height
@@ -142,7 +144,18 @@ fun CustomCircularProgressIndicator(
                     )
                 }
             }
-
         }
+    }
+}
+@Preview(showBackground = true)
+@Composable
+fun CirclePreview(){
+    CustomCircularProgressIndicator(
+        progressValue = 10,
+        primaryColor = orange,
+        secondaryColor = redOrange,
+        circleRadius = 300f
+    ) {
+
     }
 }

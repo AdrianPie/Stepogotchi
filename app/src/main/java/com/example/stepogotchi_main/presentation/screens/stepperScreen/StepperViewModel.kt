@@ -33,11 +33,6 @@ class StepperViewModel@Inject constructor(
     private val _percent = MutableStateFlow(0)
     val percent = _percent.asStateFlow()
 
-    private val _test = MutableStateFlow("2")
-    val test = _test.asStateFlow()
-
-    private val _test2 = MutableStateFlow("test 2")
-    val test2 = _test2.asStateFlow()
 
 
     init {
@@ -69,18 +64,13 @@ class StepperViewModel@Inject constructor(
         stepCounter.startListening()
         var systemStepsCollected = false
         stepCounter.setOnSensorValueChangedListener { steps ->
-            Log.d("dupsko", "countingStepsOnBeginIfExerciseExist:11 ")
             if (!systemStepsCollected){
-                Log.d("dupsko", "countingStepsOnBeginIfExerciseExist:11 ${steps[0].toInt()}")
                 sharedPreferencesUseCase.saveSystemSteps(steps[0].toInt())
-                stepsState = stepsState.copy(
-                    systemStartingSteps = steps[0].toInt()
-                )
+                saveState(systemStartingSteps = steps[0].toInt())
                 systemStepsCollected = true
             }
-            Log.d("dupsko", "countingStepsOnBeginIfExerciseExist:12 ${stepsState.stepsGoal} /${steps[0].toInt()} /${stepsState.systemStartingSteps}")
 
-            stepsState = stepsState.copy(
+            saveState(
                 sensorSteps = steps[0].toInt(),
                 stepsLeft = stepsState.stepsGoal - (steps[0].toInt() - stepsState.systemStartingSteps),
                 percentDone = ((stepsState.stepsGoal - stepsState.stepsLeft)*100) / stepsState.stepsGoal
@@ -88,63 +78,65 @@ class StepperViewModel@Inject constructor(
 
             sharedPreferencesUseCase.saveLeftStepsUseCase(stepsState.stepsLeft)
         }
-        stepsState = stepsState.copy(
+        saveState(
             stepsGoal = stepsState.stepsGoalInput.toInt(),
             stepsGoalCreated = true,
+            stepsLeft = stepsState.stepsGoal - stepsState.systemStartingSteps
         )
-
-        stepsState = stepsState.copy(stepsLeft = stepsState.stepsGoal - stepsState.systemStartingSteps)
-
     }
     private fun countingStepsOnBeginIfExerciseExist() {
-        Log.d("dupsko", "countingStepsOnBeginIfExerciseExist:1 ")
         if (sharedPreferencesUseCase.getSteps() != 0) {
-
-            Log.d(
-                "dupsko",
-                "countingStepsOnBeginIfExerciseExist:1232 ${sharedPreferencesUseCase.getLeftStepsUseCase()}"
-            )
-            stepsState = stepsState.copy(
+            saveState(
                 systemStartingSteps = sharedPreferencesUseCase.getSystemSteps(),
                 stepsGoal = sharedPreferencesUseCase.getSteps(),
                 sensorSteps = 0,
                 stepsGoalCreated = true,
-                stepsLeft = sharedPreferencesUseCase.getLeftStepsUseCase(),
+                stepsLeft = sharedPreferencesUseCase.getLeftStepsUseCase()
             )
-            stepsState = stepsState.copy(
-                percentDone = ((stepsState.stepsGoal - stepsState.stepsLeft)*100) / stepsState.stepsGoal
-            )
+            saveState(percentDone = ((stepsState.stepsGoal - stepsState.stepsLeft)*100) / stepsState.stepsGoal)
+
             if (stepsState.stepsLeft <= 0) {
-                stepsState = stepsState.copy(
-                    goalReached = true
-                )
+                saveState(goalReached = true)
             }
                 stepCounter.startListening()
                 stepCounter.setOnSensorValueChangedListener { steps ->
-                    Log.d("dupsko", "countingStepsOnBeginIfExerciseExist:2 ")
-
-                    stepsState = stepsState.copy(
+                    saveState(
                         sensorSteps = steps[0].toInt(),
                         stepsLeft = stepsState.stepsGoal - (steps[0].toInt() - stepsState.systemStartingSteps),
                         percentDone = ((stepsState.stepsGoal - stepsState.stepsLeft)*100) / stepsState.stepsGoal
                     )
-                    Log.d("dupsko", "countingStepsOnBeginIfExerciseExist:2 percent ${stepsState.percentDone}/ ${stepsState.stepsGoal}/ ${stepsState.stepsLeft}")
-
                     sharedPreferencesUseCase.saveLeftStepsUseCase(stepsState.stepsLeft)
                     if (stepsState.stepsLeft <= 0) {
-                        stepsState = stepsState.copy(
-                            goalReached = true
-                        )
-                        Log.d("dupsko", "countingStepsOnBeginIfExerciseExist:3 ")
+                        saveState(goalReached = true)
                     }
                 }
             }
-        }
+    }
+    private fun saveState(
+        stepsGoalInput: String? = null,
+        stepsGoal: Int? = null,
+        sensorSteps: Int? = null,
+        systemStartingSteps: Int? = null,
+        stepsGoalCreated: Boolean? = null,
+        stepsLeft: Int? = null,
+        percentDone: Int? = null,
+        goalReached: Boolean? = null
+    ) {
+        stepsState = stepsState.copy(
+            stepsGoalInput = stepsGoalInput ?: stepsState.stepsGoalInput,
+            stepsGoal = stepsGoal ?: stepsState.stepsGoal,
+            sensorSteps = sensorSteps ?: stepsState.sensorSteps,
+            systemStartingSteps = systemStartingSteps ?: stepsState.systemStartingSteps,
+            stepsGoalCreated = stepsGoalCreated ?: stepsState.stepsGoalCreated,
+            stepsLeft = stepsLeft ?: stepsState.stepsLeft,
+            percentDone = percentDone ?: stepsState.percentDone,
+            goalReached = goalReached ?: stepsState.goalReached
+        )
+    }
 
 
     override fun onCleared() {
         sharedPreferencesUseCase.saveLeftStepsUseCase(stepsState.stepsLeft)
-        Log.d("dupsko", "countingStepsOnBeginIfExerciseExist:1232 ${sharedPreferencesUseCase.getLeftStepsUseCase()}  tutaj")
         super.onCleared()
         stepCounter.stopListening()
     }

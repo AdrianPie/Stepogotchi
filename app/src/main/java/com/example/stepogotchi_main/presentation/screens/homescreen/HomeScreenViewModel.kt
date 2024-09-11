@@ -9,6 +9,7 @@ import com.example.stepogotchi_main.domain.repository.AuthRepository
 import com.example.stepogotchi_main.domain.repository.DatabaseRepository
 
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -25,18 +26,9 @@ class HomeScreenViewModel @Inject constructor(
    val monster = _monster.asStateFlow()
 
    init {
-      Log.d("dupsko", ":122 ")
-       viewModelScope.launch {
-          Log.d("dupsko", ":1 3")
-          //val dataExists = monsterRepository.getData().firstOrNull() != null
-          Log.d("dupsko", ":1 ")
-          if (false) {
-             println("Dane istnieją w bazie danych.")
-             Log.d("dupsko", ":2")
-          } else {
-             println("Brak danych w bazie danych.")
-             databaseRepository.insertMonster(Monster())
-             Log.d("dupsko", ":3xx ")
+       viewModelScope.launch(Dispatchers.IO) {
+          databaseRepository.getData().collect { storedMonster ->
+             _monster.value = storedMonster
           }
        }
    }

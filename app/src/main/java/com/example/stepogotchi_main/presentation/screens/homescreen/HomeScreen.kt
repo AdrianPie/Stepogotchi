@@ -90,7 +90,7 @@ fun HomeScreen(
             verticalArrangement = Arrangement.Top
         ) {
 
-            Text(text = "Name")
+
             Spacer(modifier = Modifier.height(30.dp))
 
             Text(text = "Level")
@@ -108,7 +108,7 @@ fun HomeScreen(
                 modifier = Modifier
                     .size(250.dp)
                     .clip(RoundedCornerShape(16.dp))
-                    .background(lightGray)
+                    .background(white)
                     .border(BorderStroke(4.dp, orange), shape = RoundedCornerShape(16.dp)),
                 contentAlignment = Alignment.Center
             ) {
@@ -119,30 +119,20 @@ fun HomeScreen(
                     contentDescription = "Monster Image"
                 )
             }
+            Box(
+                modifier = Modifier
+                    .size(250.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(white)
+                    .border(BorderStroke(4.dp, orange), shape = RoundedCornerShape(16.dp)),
+                contentAlignment = Alignment.Center
+            ) {
+
+            }
             Spacer(modifier = Modifier.height(40.dp))
 
-            Text(text = "Sleep")
 
-            Spacer(modifier = Modifier.height(16.dp))
 
-            StripedProgressIndicator(
-                    progress = 0.12f,
-                    stripeColor = blue,
-                    stripeColorSecondary = bluel,
-                    backgroundColor = lightGray
-                )
-            Spacer(modifier = Modifier.height(40.dp))
-
-            Text(text = "Hunger")
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            StripedProgressIndicator(
-                progress = 0.12f,
-                stripeColor = Pink80,
-                stripeColorSecondary = Pink80l,
-                backgroundColor = lightGray
-            )
 
 
 

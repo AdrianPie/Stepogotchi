@@ -1,4 +1,4 @@
-package com.example.stepogotchi_main.presentation.screens.shopScreen
+package com.example.stepogotchi_main.presentation.screens.exerciseListScreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ShopScreenViewModel @Inject constructor(
+class ExerciseListScreenViewModel @Inject constructor(
     private val getDataUseCase: GetDataUseCase
 ): ViewModel()
  {
