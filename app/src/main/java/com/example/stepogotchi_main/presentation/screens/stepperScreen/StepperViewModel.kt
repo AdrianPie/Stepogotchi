@@ -6,12 +6,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stepogotchi_main.data.model.Exercise
+import com.example.stepogotchi_main.data.model.Monster
 import com.example.stepogotchi_main.data.util.getCurrentDateString
 import com.example.stepogotchi_main.domain.repository.DatabaseRepository
 import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.GetSharedPreferencesUseCase
 import com.example.stepogotchi_main.presentation.state.StepperState
 import com.example.stepogotchi_main.sensor.MeasurableSensor
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
@@ -33,6 +35,11 @@ class StepperViewModel@Inject constructor(
     private val _percent = MutableStateFlow(0)
     val percent = _percent.asStateFlow()
 
+    var isDialogShown by mutableStateOf(false)
+        private set
+
+
+
 
 
     init {
@@ -41,22 +48,19 @@ class StepperViewModel@Inject constructor(
 
     fun finishStepGoal(){
         viewModelScope.launch {
-
-            val newExercise = Exercise().apply {
-                date = getCurrentDateString()
-                this.steps = stepsState.stepsGoal
-            }
-
-            databaseRepository.addExercise(newExercise)
-
+            addFinishedExercise()
+            databaseRepository.updateMonster(50)
             stepsState = StepperState()
-
             sharedPreferencesUseCase.resetSharedPreferences()
+            isDialogShown = true
         }
     }
 
     fun setStepsInputChange(steps: String){
         stepsState = stepsState.copy(stepsGoalInput = steps)
+    }
+    fun onDismissDialog(){
+        isDialogShown = false
     }
 
     fun createStepsGoal(){
@@ -69,13 +73,11 @@ class StepperViewModel@Inject constructor(
                 saveState(systemStartingSteps = steps[0].toInt())
                 systemStepsCollected = true
             }
-
             saveState(
                 sensorSteps = steps[0].toInt(),
                 stepsLeft = stepsState.stepsGoal - (steps[0].toInt() - stepsState.systemStartingSteps),
                 percentDone = ((stepsState.stepsGoal - stepsState.stepsLeft)*100) / stepsState.stepsGoal
             )
-
             sharedPreferencesUseCase.saveLeftStepsUseCase(stepsState.stepsLeft)
         }
         saveState(
@@ -110,7 +112,7 @@ class StepperViewModel@Inject constructor(
                         saveState(goalReached = true)
                     }
                 }
-            }
+        }
     }
     private fun saveState(
         stepsGoalInput: String? = null,
@@ -132,6 +134,17 @@ class StepperViewModel@Inject constructor(
             percentDone = percentDone ?: stepsState.percentDone,
             goalReached = goalReached ?: stepsState.goalReached
         )
+    }
+
+
+    private fun addFinishedExercise(){
+        viewModelScope.launch {
+            val newExercise = Exercise().apply {
+                date = getCurrentDateString()
+                this.steps = stepsState.stepsGoal
+            }
+            databaseRepository.addExercise(newExercise)
+        }
     }
 
 

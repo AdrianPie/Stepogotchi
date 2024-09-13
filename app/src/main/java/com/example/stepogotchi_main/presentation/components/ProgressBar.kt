@@ -32,7 +32,7 @@ fun StripedProgressIndicator(
         modifier = modifier
             .clip(clipShape)
             .background(backgroundColor)
-            .height(10.dp)
+            .height(30.dp)
             .fillMaxWidth()
     ) {
         Box(

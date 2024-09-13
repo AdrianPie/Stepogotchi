@@ -21,12 +21,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.stepogotchi_main.R
 import com.example.stepogotchi_main.presentation.components.AuthButton
 import com.example.stepogotchi_main.presentation.components.HeaderBackground
 import com.example.stepogotchi_main.presentation.components.NavDestinationHelper
@@ -176,7 +178,7 @@ fun RegisterContainer(
             modifier = Modifier
                 .fillMaxWidth(),
             description = "Email address",
-            hint = "KApps@gmail.com",
+            hint = "Ape@gmail.com",
             leadingIcon = Icons.Default.Email,
             textValue = emailValue(),
             textColor = gray,

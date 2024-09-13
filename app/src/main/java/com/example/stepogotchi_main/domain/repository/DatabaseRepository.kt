@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface DatabaseRepository {
     fun getData(): Flow<Monster>
     suspend fun insertMonster(monster: Monster)
-    suspend fun updateMonster(monster: Monster)
+    suspend fun updateMonster(expAdded: Int)
     suspend fun addExercise(exercise: Exercise)
 
 }

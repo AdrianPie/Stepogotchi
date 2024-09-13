@@ -4,6 +4,7 @@ enum class Screen {
     Login,
     Home,
     Archive,
+    Settings,
     Stepper,
     Register
 }

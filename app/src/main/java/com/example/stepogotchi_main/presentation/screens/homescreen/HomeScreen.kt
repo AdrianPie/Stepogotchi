@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
@@ -73,11 +74,7 @@ import com.google.firebase.auth.FirebaseUser
 @Composable
 fun HomeScreen(
     viewModel: HomeScreenViewModel = hiltViewModel(),
-    onLogoutClick:()-> Unit
 ) {
-
-    val monster by viewModel.monster.collectAsState()
-
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -93,10 +90,10 @@ fun HomeScreen(
 
             Spacer(modifier = Modifier.height(30.dp))
 
-            Text(text = "Level")
+            Text(text = "Level ${viewModel.homeState.level}")
 
             StripedProgressIndicator(
-                progress = 0.12f,
+                progress = viewModel.homeState.progress,
                 stripeColor = yellow,
                 stripeColorSecondary = yellowl,
                 backgroundColor = lightGray
@@ -107,6 +104,7 @@ fun HomeScreen(
             Box(
                 modifier = Modifier
                     .size(250.dp)
+                    .shadow(3.dp, shape = RoundedCornerShape(16.dp))
                     .clip(RoundedCornerShape(16.dp))
                     .background(white)
                     .border(BorderStroke(4.dp, orange), shape = RoundedCornerShape(16.dp)),
@@ -115,38 +113,32 @@ fun HomeScreen(
                 Image(
                     modifier = Modifier
                         .size(200.dp),
-                    painter = painterResource(id = monster.monsterPicture),
+                    painter = painterResource(id = viewModel.homeState.monsterPicture),
                     contentDescription = "Monster Image"
                 )
             }
+            Spacer(modifier = Modifier.height(16.dp))
             Box(
                 modifier = Modifier
-                    .size(250.dp)
+                    .fillMaxWidth(0.8f)
+                    .height(100.dp)
+                    .shadow(3.dp, shape = RoundedCornerShape(16.dp))
                     .clip(RoundedCornerShape(16.dp))
                     .background(white)
                     .border(BorderStroke(4.dp, orange), shape = RoundedCornerShape(16.dp)),
                 contentAlignment = Alignment.Center
             ) {
-
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = "TOTAL STEPS MADE:")
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(text =  "${viewModel.homeState.totalSteps}")
+                }
             }
-            Spacer(modifier = Modifier.height(40.dp))
-
-
-
-
-
-
-            Button(onClick = {
-                onLogoutClick()
-                viewModel.logout()}
-            ) {
-                Text(text = "logout")
-            }
-
-            }
-
-
         }
     }
+}
 
 

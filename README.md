@@ -23,3 +23,6 @@ Firebase Authentication: Users can create a profile and log in using Firebase, e
 
 Future Network Features:
 Additional network functionalities, such as online competitions and social features, are currently in development.
+
+![app](app/src/main/res/drawable/screenshot1.png)
+![app](app/src/main/res/drawable/screenshot2.png)

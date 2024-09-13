@@ -33,6 +33,7 @@ import com.example.stepogotchi_main.presentation.screens.exerciseListScreen.Exer
 import com.example.stepogotchi_main.presentation.screens.stepperScreen.StepperScreen
 import com.example.stepogotchi_main.data.util.Screen
 import com.example.stepogotchi_main.data.util.SnackBarController
+import com.example.stepogotchi_main.presentation.screens.settingsScreen.SettingsScreen
 import com.example.stepogotchi_main.ui.theme.lightGray
 import com.example.stepogotchi_main.ui.theme.orange
 import com.example.stepogotchi_main.ui.theme.white
@@ -98,7 +99,7 @@ fun BottomNavigationBar(
 
                         Box(
                             modifier = Modifier
-                                .size(60.dp)
+                                .size(70.dp)
                                 .noRippleClickable {
                                     selectedItemIndex = index
                                     navController.navigate(item.title)
@@ -157,6 +158,10 @@ fun BottomNavigationBar(
             }
             composable(Screen.Home.name) {
                 HomeScreen(
+                )
+            }
+            composable(Screen.Settings.name) {
+                SettingsScreen(
                     onLogoutClick = {
                         navController.navigate(Screen.Login.name) {
                             popUpTo(0)
@@ -171,7 +176,6 @@ fun BottomNavigationBar(
             composable(Screen.Stepper.name) {
                 StepperScreen(
                 )
-
             }
 
         }

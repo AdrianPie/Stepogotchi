@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -51,7 +52,7 @@ fun ExerciseListScreen(
             verticalArrangement = Arrangement.Top
         ) {
 
-            LazyColumn() {
+            LazyColumn(modifier = Modifier) {
                 items(monster.exercises){  exercise ->
                     ExerciseItem(exercise = exercise)
                 }
@@ -64,21 +65,12 @@ fun ExerciseListScreen(
     }
 @Composable
 fun ExerciseItem(exercise: Exercise) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(color = orange)
-            .padding(4.dp)
-
-    ) {
         Row(
             modifier = Modifier
                 .height(60.dp)
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(16.dp))
-                .background(white)
+                .shadow(3.dp, shape = RoundedCornerShape(10.dp))
+                .background(Color.White, shape = RoundedCornerShape(10.dp))
                 .padding(6.dp)
             ,
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -92,9 +84,8 @@ fun ExerciseItem(exercise: Exercise) {
                 Icon(imageVector = Icons.Filled.DirectionsRun, contentDescription = "Icon of running")
                 Text(text = exercise.steps.toString(), style = MaterialTheme.typography.bodyMedium)
             }
-
         }
-    }
+    Spacer(modifier = Modifier.height(6.dp))
 }
 
 @Preview(showBackground = true)

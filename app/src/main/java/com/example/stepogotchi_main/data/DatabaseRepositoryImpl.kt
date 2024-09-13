@@ -20,14 +20,14 @@ class DatabaseRepositoryImpl @Inject constructor(
         realm.write { copyToRealm(monster) }
     }
 
-    override suspend fun updateMonster(monster: Monster) {
+    override suspend fun updateMonster(expAdded: Int) {
         realm.write {
-            val existingMonster = this.query<Monster>("id == $0", monster.id).first().find()
+            val existingMonster = this.query<Monster>().first().find()
             existingMonster?.apply {
-                exp = monster.exp
-                hungryLevel = monster.hungryLevel
-                sleepLevel = monster.sleepLevel
-                exercises = monster.exercises
+                exp += expAdded
+                hungryLevel = existingMonster.hungryLevel
+                sleepLevel = existingMonster.sleepLevel
+                exercises = existingMonster.exercises
 
             }
         }
