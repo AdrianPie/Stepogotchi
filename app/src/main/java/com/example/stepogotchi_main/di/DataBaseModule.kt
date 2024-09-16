@@ -1,12 +1,12 @@
 package com.example.stepogotchi_main.di
 
 import android.content.Context
-import com.example.stepogotchi_main.data.DatabaseRepositoryImpl
-import com.example.stepogotchi_main.data.PreferencesRepositoryImpl
+import com.example.stepogotchi_main.data.repository.DatabaseRepositoryImpl
+import com.example.stepogotchi_main.data.repository.PreferencesRepositoryImpl
 import com.example.stepogotchi_main.data.model.Exercise
 import com.example.stepogotchi_main.data.model.Monster
-import com.example.stepogotchi_main.domain.repository.DatabaseRepository
-import com.example.stepogotchi_main.domain.repository.PreferencesRepository
+import com.example.stepogotchi_main.data.repository.DatabaseRepository
+import com.example.stepogotchi_main.data.repository.PreferencesRepository
 import com.example.stepogotchi_main.domain.use_case.databaseUseCase.AddExerciseUseCase
 import com.example.stepogotchi_main.domain.use_case.databaseUseCase.GetDataUseCase
 import com.example.stepogotchi_main.domain.use_case.databaseUseCase.InsertDataUseCase
@@ -46,7 +46,7 @@ object DataBaseModule {
     }
     @Singleton
     @Provides
-    fun provideMonsterRepository(realm: Realm): DatabaseRepository{
+    fun provideMonsterRepository(realm: Realm): DatabaseRepository {
         return DatabaseRepositoryImpl(realm = realm)
     }
     @Provides

@@ -1,8 +1,7 @@
-package com.example.stepogotchi_main.data
+package com.example.stepogotchi_main.data.repository
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.stepogotchi_main.domain.repository.PreferencesRepository
 
 
 class PreferencesRepositoryImpl(context: Context) : PreferencesRepository {

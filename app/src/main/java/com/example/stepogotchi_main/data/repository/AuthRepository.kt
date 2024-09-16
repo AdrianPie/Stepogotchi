@@ -1,6 +1,6 @@
-package com.example.stepogotchi_main.domain.repository
+package com.example.stepogotchi_main.data.repository
 
-import com.example.stepogotchi_main.data.Resource
+import com.example.stepogotchi_main.data.util.Resource
 import com.google.firebase.auth.FirebaseUser
 
 interface AuthRepository {

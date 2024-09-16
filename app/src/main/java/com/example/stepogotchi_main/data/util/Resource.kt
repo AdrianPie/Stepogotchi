@@ -1,4 +1,4 @@
-package com.example.stepogotchi_main.data
+package com.example.stepogotchi_main.data.util
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null, val success: Boolean?) {
     class Success<T>(data: T): Resource<T>(data, success = true)

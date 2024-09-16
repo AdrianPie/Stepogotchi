@@ -1,7 +1,7 @@
 package com.example.stepogotchi_main.domain.use_case.authUseCase
 
-import com.example.stepogotchi_main.data.Resource
-import com.example.stepogotchi_main.domain.repository.AuthRepository
+import com.example.stepogotchi_main.data.util.Resource
+import com.example.stepogotchi_main.data.repository.AuthRepository
 import com.google.firebase.auth.FirebaseUser
 
 class LoginUseCase(private val authRepository: AuthRepository) {

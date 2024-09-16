@@ -1,9 +1,8 @@
-package com.example.stepogotchi_main.domain.model
+package com.example.stepogotchi_main.sensor
 
 import android.content.Context
 import android.content.pm.PackageManager
 import android.hardware.Sensor
-import com.example.stepogotchi_main.sensor.AndroidSensor
 
 class StepSensor(
     context: Context

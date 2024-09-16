@@ -1,4 +1,4 @@
-package com.example.stepogotchi_main.domain.repository
+package com.example.stepogotchi_main.data.repository
 
 interface PreferencesRepository {
     fun saveSteps(steps: Int)

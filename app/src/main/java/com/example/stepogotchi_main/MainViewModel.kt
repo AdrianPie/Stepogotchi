@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.stepogotchi_main.data.util.GlobalLogIn
 import com.example.stepogotchi_main.data.util.Screen
-import com.example.stepogotchi_main.domain.repository.AuthRepository
+import com.example.stepogotchi_main.data.repository.AuthRepository
 import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.ResetSharedPreferencesUseCase
 import com.example.stepogotchi_main.sensor.MeasurableSensor
 import dagger.hilt.android.lifecycle.HiltViewModel

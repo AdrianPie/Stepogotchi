@@ -1,8 +1,7 @@
-package com.example.stepogotchi_main.data
+package com.example.stepogotchi_main.data.repository
 
 import com.example.stepogotchi_main.data.model.Exercise
 import com.example.stepogotchi_main.data.model.Monster
-import com.example.stepogotchi_main.domain.repository.DatabaseRepository
 import io.realm.kotlin.Realm
 import io.realm.kotlin.ext.query
 import kotlinx.coroutines.flow.Flow
