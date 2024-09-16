@@ -11,8 +11,8 @@ import com.example.stepogotchi_main.presentation.state.LoginState
 import com.example.stepogotchi_main.data.util.GlobalLogIn
 import com.example.stepogotchi_main.data.util.SnackBarController
 import com.example.stepogotchi_main.data.util.SnackBarEvent
-import com.example.stepogotchi_main.data.repository.AuthRepository
-import com.example.stepogotchi_main.data.repository.DatabaseRepository
+import com.example.stepogotchi_main.domain.repository.AuthRepository
+import com.example.stepogotchi_main.domain.repository.DatabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -1,12 +1,12 @@
 package com.example.stepogotchi_main.di
 
 import android.content.Context
-import com.example.stepogotchi_main.data.repository.DatabaseRepositoryImpl
-import com.example.stepogotchi_main.data.repository.PreferencesRepositoryImpl
+import com.example.stepogotchi_main.data.impl.DatabaseRepositoryImpl
+import com.example.stepogotchi_main.data.impl.PreferencesRepositoryImpl
 import com.example.stepogotchi_main.data.model.Exercise
 import com.example.stepogotchi_main.data.model.Monster
-import com.example.stepogotchi_main.data.repository.DatabaseRepository
-import com.example.stepogotchi_main.data.repository.PreferencesRepository
+import com.example.stepogotchi_main.domain.repository.DatabaseRepository
+import com.example.stepogotchi_main.domain.repository.PreferencesRepository
 import com.example.stepogotchi_main.domain.use_case.databaseUseCase.AddExerciseUseCase
 import com.example.stepogotchi_main.domain.use_case.databaseUseCase.GetDataUseCase
 import com.example.stepogotchi_main.domain.use_case.databaseUseCase.InsertDataUseCase

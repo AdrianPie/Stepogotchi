@@ -9,8 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.stepogotchi_main.R
 import com.example.stepogotchi_main.data.model.Monster
 import com.example.stepogotchi_main.data.util.GlobalLogIn
-import com.example.stepogotchi_main.data.repository.AuthRepository
-import com.example.stepogotchi_main.data.repository.DatabaseRepository
+import com.example.stepogotchi_main.domain.repository.AuthRepository
+import com.example.stepogotchi_main.domain.repository.DatabaseRepository
 import com.example.stepogotchi_main.presentation.state.HomeState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

@@ -1,7 +1,8 @@
-package com.example.stepogotchi_main.data.repository
+package com.example.stepogotchi_main.data.impl
 
 import com.example.stepogotchi_main.data.util.await
 import com.example.stepogotchi_main.data.util.Resource
+import com.example.stepogotchi_main.domain.repository.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest

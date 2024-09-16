@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.stepogotchi_main.data.model.Monster
 import com.example.stepogotchi_main.data.util.GlobalLogIn
 import com.example.stepogotchi_main.domain.model.RegisterInputValidationType
-import com.example.stepogotchi_main.data.repository.AuthRepository
+import com.example.stepogotchi_main.domain.repository.AuthRepository
 import com.example.stepogotchi_main.domain.use_case.databaseUseCase.InsertDataUseCase
 import com.example.stepogotchi_main.domain.use_case.validateUseCase.ValidateRegisterInputUseCase
 import com.example.stepogotchi_main.presentation.state.RegisterState

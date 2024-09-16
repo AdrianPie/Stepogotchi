@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.stepogotchi_main.data.model.Exercise
 import com.example.stepogotchi_main.data.model.Monster
 import com.example.stepogotchi_main.data.util.getCurrentDateString
-import com.example.stepogotchi_main.data.repository.DatabaseRepository
+import com.example.stepogotchi_main.domain.repository.DatabaseRepository
 import com.example.stepogotchi_main.domain.use_case.preferencesUseCase.GetSharedPreferencesUseCase
 import com.example.stepogotchi_main.presentation.state.StepperState
 import com.example.stepogotchi_main.sensor.MeasurableSensor
