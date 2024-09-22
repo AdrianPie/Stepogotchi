@@ -133,7 +133,7 @@ fun RegisterScreen(
             horizontalArrangement = Arrangement.Center
         ){
             Text(
-                "Already have an account?",
+                "Already have an account? ",
                 style = MaterialTheme.typography.bodyMedium,
             )
             Text(
