@@ -1,7 +1,6 @@
-package com.example.stepogotchi_main.domain.use_case
+package com.example.stepogotchi_main.domain.use_case.validateUseCase
 
 import com.example.stepogotchi_main.domain.model.RegisterInputValidationType
-import com.example.stepogotchi_main.domain.use_case.validateUseCase.ValidateRegisterInputUseCase
 import com.google.common.truth.Truth.assertThat
 
 import org.junit.Test
