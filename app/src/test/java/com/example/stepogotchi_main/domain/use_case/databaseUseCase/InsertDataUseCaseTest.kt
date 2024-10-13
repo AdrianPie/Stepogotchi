@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations
 
 class InsertDataUseCaseTest {
 
+
     @Mock
     private lateinit var databaseRepository: DatabaseRepository
 

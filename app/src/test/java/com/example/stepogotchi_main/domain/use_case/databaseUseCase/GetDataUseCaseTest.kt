@@ -26,13 +26,15 @@ class GetDataUseCaseTest {
         getDataUseCase = GetDataUseCase(databaseRepository)
     }
 
+
+
     @Test
     fun `invoke should return data from repository`() = runBlocking {
-        val monster = Monster(/* initialize with test data */)
+        val monster = Monster()
         `when`(databaseRepository.getData()).thenReturn(flowOf(monster))
 
         val result = getDataUseCase()
 
-        // Add assertions to verify the result
+
     }
 }
